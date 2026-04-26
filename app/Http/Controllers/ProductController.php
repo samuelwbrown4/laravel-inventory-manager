@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Events\ProductCreated;
+
 
 class ProductController extends Controller
 {
@@ -39,7 +41,10 @@ class ProductController extends Controller
         'category_id' => 'required|exists:categories,id',
     ]);
 
-    Product::create($validated);
+    $product =Product::create($validated);
+
+    ProductCreated::dispatch($product);
+
     return redirect()->route('products.index');
     }
 

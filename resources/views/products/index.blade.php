@@ -6,6 +6,9 @@
     <title>Products</title>
 </head>
 <body>
+    @if(session('warning'))
+    <p style="color: orange;">{{ session('warning') }}</p>
+    @endif
     <h1>Products</h1>
     <a href="{{ route('products.create') }}">Add Product</a>
 

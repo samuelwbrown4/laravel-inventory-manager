@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Services\CategoryService;
+use App\Events\CategoryDeleted;
 
 class CategoryController extends Controller
 {
@@ -64,9 +66,19 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category, CategoryService $categoryService)
     {
+        if($categoryService->hasProducts($category)){
+            session()->flash('warning', 'Cannot delete category with products');
+            return redirect()->route('categories.index');
+        }
+
+        CategoryDeleted::dispatch($category);
+
     $category->delete();
+
+    
+
     return redirect()->route('categories.index');
     }
 }
