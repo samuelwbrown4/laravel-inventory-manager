@@ -7,6 +7,7 @@
 <body>
     <h1>Categories</h1>
     <a href="{{ route('categories.create') }}">Add Category</a>
+    <a href="{{ '/' }}">Home</a>
     @if(session('warning'))
     <p style="color: orange;">{{ session('warning') }}</p>
     @endif

@@ -9,8 +9,8 @@
 <body>
     <h1>Welcome to the Inventory Manager</h1>
     <div id="links">
-        <a href="{{ route('products.index') }}">View Products</a>
-        <a href="{{ route('categories.index') }}">View Categories</a>
+        <a href="{{ route('products.index') }}">View Products ({{$products}})</a>
+        <a href="{{ route('categories.index') }}">View Categories ({{ $categoryCount }})</a>
     </div>
 </body>
 </html>
